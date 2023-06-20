@@ -1,51 +1,67 @@
 const cardArray = [
     {
-        name: 'fries',
-        img: 'images/fries.png' 
+        name: 'bee',
+        img: 'images/bee.png' 
     },
     {
-        name: 'cheeseburger',
-        img: 'images/cheeseburger.png' 
+        name: 'bunny',
+        img: 'images/bunny.png' 
     },
     {
-        name: 'hotdog',
-        img: 'images/hotdog.png' 
+        name: 'cat',
+        img: 'images/cat.png' 
     },
     {
-        name: 'ice-cream',
-        img: 'images/ice-cream.png' 
+        name: 'dog',
+        img: 'images/dog.png' 
     },
     {
-        name: 'milkshake',
-        img: 'images/milkshake.png' 
+        name: 'elephant',
+        img: 'images/elephant.png' 
     },
     {
-        name: 'pizza',
-        img: 'images/pizza.png' 
+        name: 'gator',
+        img: 'images/gator.png' 
     },
     {
-        name: 'fries',
-        img: 'images/fries.png' 
+        name: 'panda',
+        img: 'images/panda.png' 
     },
     {
-        name: 'cheeseburger',
-        img: 'images/cheeseburger.png' 
+        name: 'shark',
+        img: 'images/shark.png' 
     },
     {
-        name: 'hotdog',
-        img: 'images/hotdog.png' 
+        name: 'bee',
+        img: 'images/bee.png' 
     },
     {
-        name: 'ice-cream',
-        img: 'images/ice-cream.png' 
+        name: 'bunny',
+        img: 'images/bunny.png' 
     },
     {
-        name: 'milkshake',
-        img: 'images/milkshake.png' 
+        name: 'cat',
+        img: 'images/cat.png' 
     },
     {
-        name: 'pizza',
-        img: 'images/pizza.png' 
+        name: 'dog',
+        img: 'images/dog.png' 
+    },
+    {
+        name: 'elephant',
+        img: 'images/elephant.png' 
+    },
+    {
+        name: 'gator',
+        img: 'images/gator.png' 
+    },
+    {
+        name: 'panda',
+        img: 'images/panda.png' 
+    },
+    {
+        name: 'shark',
+        img: 'images/shark.png' 
     },
 ]
 
@@ -60,7 +76,7 @@ const cardsWon = []
 function createBoard() {
     for (let i = 0; i < cardArray.length; i++) {
         const card = document.createElement('img')
-        card.setAttribute('src', 'images/blank.png')
+        card.setAttribute('src', 'images/back.png')
         card.setAttribute('data-id', i)
         card.addEventListener('click', flipCard)
         gridDisplay.append(card)
@@ -74,23 +90,23 @@ function checkMatch() {
     const optionOneId = cardsChoosenIds[0]
     const optionTwoId = cardsChoosenIds[1]
 
-    if (optionOneId == optionTwoId) {
+    if (optionOneId == optionTwoId) { // If the same card is clicked
         alert('Same card clicked')
-        cards[optionOneId].setAttribute('src', 'images/blank.png')
-        cards[optionTwoId].setAttribute('src', 'images/blank.png')
+        cards[optionOneId].setAttribute('src', 'images/back.png')
+        cards[optionTwoId].setAttribute('src', 'images/back.png')
     }
 
-    if (cardsChoosen[0] == cardsChoosen[1]) {
+    if (cardsChoosen[0] == cardsChoosen[1]) { //If the cards choosen match
         alert("Found a match")
-        cards[optionOneId].setAttribute('src', 'images/white.png')
-        cards[optionTwoId].setAttribute('src', 'images/white.png')
+        cards[optionOneId].setAttribute('src', 'images/check.png')
+        cards[optionTwoId].setAttribute('src', 'images/check.png')
         cards[optionOneId].removeEventListener('click', flipCard)
         cards[optionTwoId].removeEventListener('click', flipCard)
         
         cardsWon.push(cardsChoosen)
-    } else {
-        cards[optionOneId].setAttribute('src', 'images/blank.png')
-        cards[optionTwoId].setAttribute('src', 'images/blank.png')
+    } else { //If cards choosen do not match
+        cards[optionOneId].setAttribute('src', 'images/back.png')
+        cards[optionTwoId].setAttribute('src', 'images/back.png')
         alert("Try Again")
     }
     resultDisplay.textContent = cardsWon.length
