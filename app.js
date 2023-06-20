@@ -69,6 +69,7 @@ cardArray.sort(() => 0.5 - Math.random()) //Sorts array randomly
 
 const gridDisplay = document.querySelector("#grid")
 const resultDisplay = document.querySelector('#result')
+const errorDisplay = document.querySelector('#error')
 let cardsChoosen = []
 let cardsChoosenIds = []
 const cardsWon = []
@@ -90,25 +91,26 @@ function checkMatch() {
     const optionOneId = cardsChoosenIds[0]
     const optionTwoId = cardsChoosenIds[1]
 
-    if (optionOneId == optionTwoId) { // If the same card is clicked
-        alert('Same card clicked')
-        cards[optionOneId].setAttribute('src', 'images/back.png')
-        cards[optionTwoId].setAttribute('src', 'images/back.png')
-    }
-
     if (cardsChoosen[0] == cardsChoosen[1]) { //If the cards choosen match
-        alert("Found a match")
         cards[optionOneId].setAttribute('src', 'images/check.png')
         cards[optionTwoId].setAttribute('src', 'images/check.png')
         cards[optionOneId].removeEventListener('click', flipCard)
         cards[optionTwoId].removeEventListener('click', flipCard)
-        
         cardsWon.push(cardsChoosen)
     } else { //If cards choosen do not match
         cards[optionOneId].setAttribute('src', 'images/back.png')
         cards[optionTwoId].setAttribute('src', 'images/back.png')
-        alert("Try Again")
     }
+
+    if (optionOneId == optionTwoId) { // If the same card is clicked
+        cards[optionOneId].setAttribute('src', 'images/back.png')
+        cards[optionTwoId].setAttribute('src', 'images/back.png')
+        cardsWon.pop(cardsChoosen)
+        cards[optionOneId].addEventListener('click', flipCard)
+        cards[optionTwoId].addEventListener('click', flipCard)
+        errorDisplay.textContent = "You can't select the same card twice! Try Again!"
+    }
+
     resultDisplay.textContent = cardsWon.length
     cardsChoosen = []
     cardsChoosenIds = []
@@ -116,9 +118,11 @@ function checkMatch() {
     if (cardsWon.length == cardArray.length / 2) {
         resultDisplay.textContent= "Congrats! You Won!"
     }
+    
 }
 
 function flipCard() {
+    errorDisplay.textContent = ""
     const cardId = this.getAttribute('data-id')
     cardsChoosen.push(cardArray[cardId].name)
     cardsChoosenIds.push(cardId)
